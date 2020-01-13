@@ -7,11 +7,10 @@ function gifDisplay() {
     var hero = $(this).attr("data-name");
     var queryUrl = "https://api.giphy.com/v1/gifs/search?q=" + Hero + "&api_key=PzWVIo3ocW3i5iJKFy7ceDRxGL2hMfxd";
 
-
     //Ajax Call
     $.ajax({ url: queryUrl, method: "Get"}).done(function(response) {
 
-        //Empty div holdign previos Gifs
+        //Empty div holdign previous Gifs
         $('gifStorage').empty();
 
         for (let i = 0; i < response.data.length; i++){
@@ -60,3 +59,36 @@ $('.gifStorage').on("click", ".gImage", function() {
     }
 
 });
+
+// new button
+function renderButtons() {
+
+    $(".buttons-original").empty();
+
+    // Verifying buttons
+    for (let i = 0; i < hero.length; i++)
+        addButton = $('button class = "button">');
+        addButton.addClass("hero");
+        addButton.attr("data-name", hero[i]);
+        addButton.html(hero[i]);
+
+        // Append newly created buttons to the end of existing buttons
+        $(".buttons-original").append(addButton);
+
+};
+
+// New button created when field has a value and then clearing it 
+
+$(".add-gif").on("click", function(event) {
+
+    event.preventDefault();
+    var gifs = $(".gifName").val().trim();
+    hero.push(gifs);
+    $(".gifName").val("");
+    renderButtons();
+
+});
+
+// Call button in class of hero
+$(document).on("click", ".hero", displayGif);
+renderButtons();
