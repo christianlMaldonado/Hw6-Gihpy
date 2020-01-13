@@ -66,8 +66,8 @@ function renderButtons() {
     $(".buttons-original").empty();
 
     // Verifying buttons
-    for (let i = 0; i < hero.length; i++)
-        addButton = $('button class = "button">');
+    for ( i = 0; i < hero.length; i++)
+        addButton = $('<button class = "button">');
         addButton.addClass("hero");
         addButton.attr("data-name", hero[i]);
         addButton.html(hero[i]);
@@ -90,5 +90,5 @@ $(".add-gif").on("click", function(event) {
 });
 
 // Call button in class of hero
-$(document).on("click", ".hero", displayGif);
+$(document).on("click", ".hero", gifDisplay);
 renderButtons();
