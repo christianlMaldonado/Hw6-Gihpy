@@ -40,3 +40,23 @@ function gifDisplay() {
     });
 
 };
+
+// on Click funciton to pause/resume GIF
+
+$('.gifStorage').on("click", ".gImage", function() {
+
+    var state = $(this).attr('data-state');
+    // If state = still, on click will resume the GIF
+
+    if (state == 'still') {
+
+        $(this).attr('src', $(this).data('animate'));
+        $(this).attr('data-state', 'animate');
+    }
+    else {
+
+        $(this).attr('src', $(this).data('still'));
+        $(this).attr('data-state', 'still');
+    }
+
+});
