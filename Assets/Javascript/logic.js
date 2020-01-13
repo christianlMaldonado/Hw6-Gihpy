@@ -1,17 +1,17 @@
 
 // hero array
-var hero = ["Captain America", "Hulk", "Iron Man", "Thor", "Black Widow", "Hawkeye"]
+var hero = ["Captain America", "Hulk", "Iron Man", "Thor"];
 
-function gifDisplay() {
+function displayGif() {
 
     var hero = $(this).attr("data-name");
-    var queryUrl = "https://api.giphy.com/v1/gifs/search?q=" + hero + "&api_key=PzWVIo3ocW3i5iJKFy7ceDRxGL2hMfxd=10";
+    var queryUrl = "http://api.giphy.com/v1/gifs/search?q=" + hero + "&api_key=PzWVIo3ocW3i5iJKFy7ceDRxGL2hMfxd=10";
 
     //Ajax Call
     $.ajax({ url: queryUrl, method: "GET"}).done(function(response) {
 
-        //Empty div holdign previous Gifs
-        $('gifStorage').empty();
+        //Empty div holding previous Gifs
+        $('.gifGoesHere').empty();
 
         for (i = 0; i < response.data.length; i++){
 
@@ -32,7 +32,7 @@ function gifDisplay() {
             // Securing ratings appear after their respective gifs
             gifDiv.append(ratingDiv);
             gifDiv.prepend(gifImg);
-            $('.gifStorage').prepend(gifDiv);
+            $('.gifgoesHere').prepend(gifDiv);
 
         } 
 
@@ -42,7 +42,7 @@ function gifDisplay() {
 
 // on Click funciton to pause/resume GIF
 
-$('.gifStorage').on("click", ".gImage", function() {
+$('.gifGoesHere').on("click", ".gImage", function() {
 
     var state = $(this).attr('data-state');
     // If state = still, on click will resume the GIF
@@ -67,7 +67,7 @@ function renderButtons() {
     $(".buttons-original").empty();
 
     // Verifying buttons
-    for ( i = 0; i < hero.length; i++)
+    for ( i = 0; i < hero.length; i++) {
         addButton = $('<button class="button">');
         addButton.addClass("hero");
         addButton.attr("data-name", hero[i]);
@@ -75,21 +75,21 @@ function renderButtons() {
 
         // Append newly created buttons to the end of existing buttons
         $(".buttons-original").append(addButton);
-
+    }
 };
 
 // New button created when field has a value and then clearing it 
 
-$(".addGif").on("click", function(event) {
+$(".add-gif").on("click", function(event) {
 
     event.preventDefault();
-    var gifs = $(".gifName").val().trim();
+    var gifs = $(".gif-name").val().trim();
     hero.push(gifs);
-    $(".gifName").val("");
+    $(".gif-name").val("");
     renderButtons();
 
 });
 
 // Call button in class of hero
-$(document).on("click", ".hero", gifDisplay);
+$(document).on("click", ".hero", displayGif);
 renderButtons();
